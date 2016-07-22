@@ -99,6 +99,26 @@ namespace BandTracker
       //Assert
       Assert.Equal(testList, result);
     }
+    [Fact]
+    public void Test_GetVenueByBand_GetsVenuesByBand()
+    {
+      //Arrange
+      Band testBand = new Band("Deftones");
+      testBand.Save();
 
+      Venue testVenue1 = new Venue("dad's garage");
+      testVenue1.Save();
+
+      Venue testVenue2 = new Venue("Madison Square Garden");
+      testVenue2.Save();
+
+      //Act
+      testBand.AddVenueToBand(testVenue1.GetId());
+      List<Venue> result = testBand.GetVenueByBand();
+      List<Venue> testList = new List<Venue> {testVenue1};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
   }
 }
