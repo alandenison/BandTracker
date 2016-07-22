@@ -38,5 +38,19 @@ namespace BandTracker
       //Assert
       Assert.Equal(firstBand, secondBand);
     }
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange
+      Venue testBand = new Band("Deftones");
+
+      //Act
+      testBand.Save();
+      List<Band> result = Band.GetAll();
+      List<Band> testList = new List<Band>{testBand};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
   }
 }
