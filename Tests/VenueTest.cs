@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace BandTracker
 {
-  public class Venue : IDisposable
+  public class VenueTest : IDisposable
   {
     public RecipeTest()
     {
