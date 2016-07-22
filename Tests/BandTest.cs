@@ -80,5 +80,24 @@ namespace BandTracker
       //Assert
       Assert.Equal(testBand, foundBand);
     }
+    [Fact]
+    public void Test_AddVenueToBand_AddsVenueToBand()
+    {
+      //Arrange
+      Venue testVenue = new Venue("dad's garage");
+      testVenue.Save();
+
+      Band testBand = new Band("Deftones");
+      testBand.Save();
+
+      //Act
+      testBand.AddVenueToBand(testVenue.GetId());
+
+      List<Venue> result = testBand.GetVenuesFromVenue();
+      List<Venue> testList = new List<Venue>{testVenue};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
   }
 }
