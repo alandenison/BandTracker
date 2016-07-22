@@ -83,18 +83,37 @@ namespace BandTracker
     }
     [Fact]
       public void Test_Update_UpdatesInDatabase()
-      {
-        //Arrange
-        Venue newVenue = new Venue("dad's garage");
-        newVenue.Save();
-        string newName = "Madison Square Garden";
+    {
+      //Arrange
+      Venue newVenue = new Venue("dad's garage");
+      newVenue.Save();
+      string newName = "Madison Square Garden";
 
-        //Act
-        newVenue.Update(newName);
-        string resultNewName = newVenue.GetName();
+      //Act
+      newVenue.Update(newName);
+      string resultNewName = newVenue.GetName();
 
-        //Assert
-        Assert.Equal(newName, resultNewName);
-      }
+      //Assert
+      Assert.Equal(newName, resultNewName);
+    }
+    [Fact]
+    public void Test_AddBand_AddsBandToVenue()
+    {
+      //Arrange
+      Venue testVenue = new Venue("dad's garage");
+      testVenue.Save();
+
+      Band testBand = new Band("Deftones");
+      testBand.Save();
+
+      //Act
+      testVenue.AddBand(testBand.GetId());
+
+      List<Band> result = testVenue.GetBands();
+      List<Band> testList = new List<Band>{testBand};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
   }
 }
