@@ -109,7 +109,7 @@ namespace BandTracker
       //Act
       testVenue.AddBandToVenue(testBand.GetId());
 
-      List<Band> result = testVenue.GetBands();
+      List<Band> result = testVenue.GetBandsFromVenue();
       List<Band> testList = new List<Band>{testBand};
 
       //Assert
