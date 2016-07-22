@@ -52,5 +52,21 @@ namespace BandTracker
       //Assert
       Assert.Equal(testList, result);
     }
+    [Fact]
+    public void Test_Save_AssignsIdToObject()
+    {
+      //Arrange
+      Band testBand = new Band("Deftones");
+
+      //Act
+      testBand.Save();
+      Band savedBand = Band.GetAll()[0];
+
+      int result = savedBand.GetId();
+      int testId = testBand.GetId();
+
+      //Assert
+      Assert.Equal(testId, result);
+    }
   }
 }
