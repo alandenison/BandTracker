@@ -151,7 +151,7 @@ namespace BandTracker
       List<Venue> resultVenues = Venue.GetAll();
 
       //Assert
-      Assert.Equal(1, resultVenues.Count());
+      Assert.Equal(1, resultVenues.Count);
     }
   }
 }
