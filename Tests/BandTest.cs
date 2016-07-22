@@ -120,5 +120,21 @@ namespace BandTracker
       //Assert
       Assert.Equal(testList, result);
     }
+    public void Test_Delete_DeletesFromDatabase()
+    {
+      //Arrange
+      Band testBand1 = new Band("Deftones");
+      testBand1.Save();
+
+      Band testBand2 = new Band("...And You Will Know Us by the Trail of Dead");
+      testBand2.Save();
+
+      //Act
+      testBand1.Delete();
+      List<Band> resultBands = Band.GetAll();
+
+      //Assert
+      Assert.Equal(1, resultBands.Count);
+    }
   }
 }

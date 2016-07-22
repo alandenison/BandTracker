@@ -249,7 +249,6 @@ namespace BandTracker
       {
         conn.Close();
       }
-
     }
   }
 }
