@@ -68,5 +68,17 @@ namespace BandTracker
       //Assert
       Assert.Equal(testId, result);
     }
+    public void Test_Find_FindInDatabase()
+    {
+      //Arrange
+      Band testBand = new Band("Deftones");
+      testBand.Save();
+
+      //Act
+      Band foundBand = Band.Find(testBand.GetId());
+
+      //Assert
+      Assert.Equal(testBand, foundBand);
+    }
   }
 }
