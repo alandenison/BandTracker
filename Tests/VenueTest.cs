@@ -115,5 +115,26 @@ namespace BandTracker
       //Assert
       Assert.Equal(testList, result);
     }
+    [Fact]
+    public void Test_GetBandsFromVenue_ReturnsAllBandsFromVenue()
+    {
+      //Arrange
+      Venue testVenue = new Venue("dad's garage");
+      testVenue.Save();
+
+      Band testBand1 = new Band("Deftones");
+      testBand1.Save();
+
+      Band testBand2 = new Band("...And You Will Know Us by the Trail of Dead");
+      testBand2.Save();
+
+      //Act
+      testVenue.AddBandToVenue(testBand1.GetId());
+      List<Band> result = testVenue.GetBandsFromVenue();
+      List<Band> testList = new List<Band> {testBand1};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
   }
 }
