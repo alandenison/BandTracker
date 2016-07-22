@@ -141,12 +141,12 @@ namespace BandTracker
       }
       return foundBand;
     }
-    public void AddVenueToBand(Venue newVenue)
+    public void AddVenueToBand(int newVenueId)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO venue_band (band_id, venue_id) VALUES (@BandId, @VenueId)", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO venue_band (venue_id, band_id) VALUES  (@VenueId,@BandId)", conn);
       SqlParameter bandIdParameter = new SqlParameter();
       bandIdParameter.ParameterName = "@BandId";
       bandIdParameter.Value = this.GetId();
@@ -154,7 +154,7 @@ namespace BandTracker
 
       SqlParameter venueIdParameter = new SqlParameter();
       venueIdParameter.ParameterName = "@VenueId";
-      venueIdParameter.Value = newVenue.GetId();
+      venueIdParameter.Value = newVenueId;
       cmd.Parameters.Add(venueIdParameter);
 
       cmd.ExecuteNonQuery();
@@ -163,6 +163,40 @@ namespace BandTracker
       {
         conn.Close();
       }
+    }
+    public List<Venue> GetVenueByBand()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT venues.* FROM Bands JOIN venue_band ON (Bands.id = venue_band.band_id) JOIN venues ON (venue_band.venue_id = venues.id) WHERE Bands.id = @BandId", conn);
+      SqlParameter BandIdParam = new SqlParameter();
+      BandIdParam.ParameterName = "@BandId";
+      BandIdParam.Value = this.GetId().ToString();
+
+      cmd.Parameters.Add(BandIdParam);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Venue> venues = new List<Venue>{};
+
+      while(rdr.Read())
+      {
+        int venueId = rdr.GetInt32(0);
+        string venueName = rdr.GetString(1);
+        Venue newVenue = new Venue(venueName, venueId);
+        venues.Add(newVenue);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return venues;
     }
   }
 }

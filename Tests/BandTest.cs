@@ -93,11 +93,12 @@ namespace BandTracker
       //Act
       testBand.AddVenueToBand(testVenue.GetId());
 
-      List<Venue> result = testBand.GetVenuesFromVenue();
+      List<Venue> result = testBand.GetVenueByBand();
       List<Venue> testList = new List<Venue>{testVenue};
 
       //Assert
       Assert.Equal(testList, result);
     }
+
   }
 }
