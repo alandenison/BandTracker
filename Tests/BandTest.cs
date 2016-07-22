@@ -42,7 +42,7 @@ namespace BandTracker
     public void Test_Save_SavesToDatabase()
     {
       //Arrange
-      Venue testBand = new Band("Deftones");
+      Band testBand = new Band("Deftones");
 
       //Act
       testBand.Save();
