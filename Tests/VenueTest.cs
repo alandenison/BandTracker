@@ -97,7 +97,7 @@ namespace BandTracker
       Assert.Equal(newName, resultNewName);
     }
     [Fact]
-    public void Test_AddBand_AddsBandToVenue()
+    public void Test_AddBandToVenue_AddsBandToVenue()
     {
       //Arrange
       Venue testVenue = new Venue("dad's garage");
@@ -107,7 +107,7 @@ namespace BandTracker
       testBand.Save();
 
       //Act
-      testVenue.AddBand(testBand.GetId());
+      testVenue.AddBandToVenue(testBand.GetId());
 
       List<Band> result = testVenue.GetBands();
       List<Band> testList = new List<Band>{testBand};
