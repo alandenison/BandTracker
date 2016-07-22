@@ -31,10 +31,12 @@ CREATE DATABASE band_tracker_test;
 GO  
 USE DATABASE band_tracker_test;  
 GO  
-CREATE TABLE bands(id INT IDENTITY (1,1), name VARCHAR(255));  
+CREATE TABLE bands(id INT IDENTITY(1,1), name VARCHAR(255));  
 GO  
-CREATE TABLE venues(id INT IDENTITY (1,1), name VARCHAR(255));  
+CREATE TABLE venues(id INT IDENTITY(1,1), name VARCHAR(255));  
 GO  
+CREATE TABLE venue_band(id INT IDENTITY(1,1), venue_id INT, band_id INT);
+GO
 
 ## Technologies Used
 

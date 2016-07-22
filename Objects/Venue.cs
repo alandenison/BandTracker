@@ -18,7 +18,7 @@ namespace BandTracker
     {
       return _id;
     }
-    public int GetName()
+    public string GetName()
     {
       return _name;
     }
@@ -59,7 +59,7 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM venues; DELETE FROM venues_band;", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM venues; DELETE FROM venue_band;", conn);
       cmd.ExecuteNonQuery();
       conn.Close();
     }

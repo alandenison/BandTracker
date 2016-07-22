@@ -8,7 +8,7 @@ namespace BandTracker
 {
   public class VenueTest : IDisposable
   {
-    public RecipeTest()
+    public VenueTest()
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=band_tracker_test;Integrated Security=SSPI;";
     }
