@@ -36,7 +36,7 @@ namespace BandTracker
       Band secondBand = new Band("Deftones");
 
       //Assert
-      Assert.Equal(firstband, secondBand);
+      Assert.Equal(firstBand, secondBand);
     }
   }
 }
