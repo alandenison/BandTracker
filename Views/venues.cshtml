@@ -1,13 +1,12 @@
 <h1>Venues</h1>
-
 @foreach (var venue in @Model)
 {
-  <li><a href="/venue/@venue.GetId()">@venue.GetName()</a> |
-  <form action="/venue/delete" method = "post">
-    <input hidden name "venue-id" value='@venue.GetId()'>
-    <button type="submit">Delete</button>
-  </form></li>
+<form action = "/venue-delete" method="post">
+  <li><a href="/venue/@venue.GetId()">@venue.GetName()</a><input hidden name="venue-id" value=@venue.GetId()>
+  <button type="submit" name="button">delete</button></li>
+</form>
 }
+
 <Form action = "add-venue" method = "post">
   <label for="venue-name">Venue Name</label>
   <input type="text" name="venue-name">
