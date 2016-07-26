@@ -1,10 +1,9 @@
-<h1>@Model["venue"].GetName()</h1>
+<h1>@Model["venue"].GetName() Venue</h1>
 
 
 @foreach (var band in @Model["band"])
 {
-@band.GetName()
-<li><form action = "/delete-band-from-venue" method="post">@band.GetName() | <input hidden name="venue-band-name" value="@band.GetId()"><input hidden name="venue-update" value='@Model["venue"].GetId()'><button type="submit" name="remove">remove</button></form></li>
+<li><form action = "/delete-band-from-venue" method="post">@band.GetName() | <input hidden name="venue-band-id" value='@band.GetId()'><input hidden name="venue-update" value='@Model["venue"].GetId()'><button type="submit" name="remove">remove</button></form></li>
 }
 
 <Form action = '/venue/@Model["venue"].GetId()/add-band' method = 'post'>
@@ -15,6 +14,13 @@
     }
   </select>
   <button type="submit" name="name">add band to venue</button>
+</form>
+
+<form action='/venue/@Model["venue"].GetId()/update' method = "post">
+  <input type="hidden" name="_method" value="PATCH">
+
+<input type = "text" name = "venue-name" value = '@Model["venue"].GetName()'></input>
+<br><button type="submit">Update</button>
 </form>
 
 <a href="/">home</a>

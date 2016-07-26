@@ -40,7 +40,6 @@ namespace BandTracker
         return View["band.cshtml", model];
       };
       Post["/venue-delete"] = _ => {
-        Console.WriteLine("hi" + Request.Form["venue-id"]);
         int venueId = Request.Form["venue-id"];
         Venue venueFound = Venue.Find(venueId);
         venueFound.Delete();
@@ -56,7 +55,6 @@ namespace BandTracker
       return View["index.cshtml"];
       };
       Post["/band-delete"] = _ => {
-        Console.WriteLine("hi" + Request.Form["band-id"]);
         int bandId = Request.Form["band-id"];
         Band bandFound = Band.Find(bandId);
         bandFound.Delete();
@@ -78,6 +76,13 @@ namespace BandTracker
         thisBand.AddVenueToBand(venueId);
         return View["success.cshtml", ("band/" + bandId)];
       };
+      Post["/venue/{id}/add-band"] = parameters => {
+        int bandId = Request.Form["add-band-to-venue"];
+        int venueId = parameters.id;
+        Venue thisVenue = Venue.Find(parameters.id);
+        thisVenue.AddBandToVenue(bandId);
+        return View["success.cshtml", ("venue/" + venueId)];
+      };
       Post["/delete-venue-from-band"] = _ => {
         int venueId = Request.Form["band-venue-name"];
         Band SelectedBand = Band.Find(Request.Form["band-update"]);
@@ -85,19 +90,18 @@ namespace BandTracker
         int bandId = SelectedBand.GetId();
         return View["success.cshtml", ("/band/" + bandId)];
       };
-      Post["/venue/{id}/add-band"] = parameters => {
-        int bandId = Request.Form["add-band-to-venue"];
-        int venueId = parameters.id;
-        Band thisBand = Band.Find(parameters.id);
-        thisBand.AddVenueToBand(bandId);
-        return View["success.cshtml", ("venue/" + venueId)];
-      };
       Post["/delete-band-from-venue"] = _ => {
-        int bandId = Request.Form["venue-band-name"];
-        Band SelectedBand = Band.Find(Request.Form["venue-update"]);
-        SelectedBand.DeleteVenueFromBand(bandId);
-        int venueId = SelectedBand.GetId();
+        int bandId = Request.Form["venue-band-id"];
+        Venue SelectedVenue = Venue.Find(Request.Form["venue-update"]);
+        SelectedVenue.DeleteBandFromVenue(bandId);
+        int venueId = SelectedVenue.GetId();
         return View["success.cshtml", ("/venue/" + venueId)];
+      };
+      Patch["/venue/{id}/update"] = parameters => {
+        int VenueId = parameters.id;
+        Venue SelectedVenue = Venue.Find(parameters.id);
+        SelectedVenue.Update(Request.Form["venue-name"]);
+        return View["success.cshtml", "/venue/" + VenueId];
       };
     }
   }
